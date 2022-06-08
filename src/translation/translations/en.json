@@ -312,8 +312,8 @@
     "title": "My account"
   },
   "pagination": {
-    "itemOf": "item {{currentPageLastIndex}} out of {{itemsCount}}",
-    "itemsOf": "items {{firstItemNumber}} - {{currentPageLastIndex}} out of {{itemsCount}}"
+    "itemOf": "Item {{currentPageLastIndex}} out of {{itemsCount}}",
+    "itemsOf": "Items {{firstItemNumber}} - {{currentPageLastIndex}} out of {{itemsCount}}"
   },
   "supplyWithdraw": {
     "borrowLimit": "Borrow limit",
@@ -518,9 +518,9 @@
     "youAreStaking": "You are staking"
   },
   "vote": {
-    "abstain": "Abstain",
-    "against": "Against",
+    "createProposal": "+ Create proposal",
     "delegateAddress": "Delegate address",
+    "delegate": "Delegate",
     "delegateLeaderboard": "Delegate leaderboard",
     "delegateVoting": "Delegate voting",
     "delegateYourVoting": "2. <Anchor>Delegate your voting power</Anchor> to yourself or somebody else",
@@ -528,15 +528,22 @@
     "depositXvs": "Deposit XVS",
     "depositYourTokens": "1. <Link>Deposit your tokens</Link> in the XVS Vault ",
     "enterContactAddress": "Enter contact address",
-    "for": "For",
     "governanceProposals": "Governance proposals",
     "pasteYourAddress": "Paste your address",
     "pleasePayAttention": "Please pay attention",
+    "redelegate": "Redelegate",
+    "redelegateVoting": "Redelegate voting",
+    "requiredVotingPower": "You need to have 300k voting power to create a proposal",
+    "successfulDelegationModal": {
+      "message": "You successfully delegated",
+      "title": "Your delegation was successful"
+    },
     "totalLocked": "Total locked",
     "toVoteYouShould": "To vote you should:",
     "votingWallet": "Voting wallet",
     "votingWeight": "Voting weight",
-    "youCanDelegateVotes": "You can delegate votes to yourself or somebody else. If you know the address you wish to delegate to, enter it below. If not, you can view the Delegate Leaderboard to find a political party you wish to support"
+    "youCanDelegateVotes": "You can delegate votes to yourself or somebody else. If you know the address you wish to delegate to, enter it below. If not, you can view the Delegate Leaderboard to find a political party you wish to support",
+    "youDelegatedTo": "You delegated your locked tokens to {{delegate}}"
   },
   "voteProposalUi": {
     "activeUntil": "Active until:",
@@ -558,8 +565,9 @@
       "cancelled": "Cancelled",
       "executed": "Executed",
       "for": "For",
+      "pending": "Pending",
       "queued": "Queue",
-      "readyToExecute": "Ready to execute"
+      "readyToQueue": "Ready to queue"
     },
     "voteStatus": {
       "abstained": "Abstained",
