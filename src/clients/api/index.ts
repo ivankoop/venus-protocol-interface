@@ -69,6 +69,10 @@ export { default as withdrawXvs } from './mutations/withdrawXvs';
 export * from './mutations/withdrawXvs';
 export { default as useWithdrawXvs } from './mutations/useWithdrawXvs';
 
+export { default as claimVaiVaultReward } from './mutations/claimVaiVaultReward';
+export * from './mutations/claimVaiVaultReward';
+export { default as useClaimVaiVaultReward } from './mutations/useClaimVaiVaultReward';
+
 // Queries
 export { default as getVaiTreasuryPercentage } from './queries/getVaiTreasuryPercentage';
 export * from './queries/getVaiTreasuryPercentage';
