@@ -7,12 +7,11 @@ import { XVS_TOKEN_ADDRESS } from 'constants/xvs';
 import { generateBscScanUrl, getTokenIdFromVAddress } from 'utilities';
 import { formatCoinsToReadableValue } from 'utilities/common';
 import { useTranslation } from 'translation';
-import { TokenId } from 'types';
-import { Transaction } from 'models';
+import { ITransaction, TokenId } from 'types';
 import { useStyles } from './styles';
 
 export interface IHistoryTableProps {
-  transactions: Transaction[];
+  transactions: ITransaction[];
   isLoading: boolean;
 }
 
