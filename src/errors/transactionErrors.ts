@@ -8,6 +8,8 @@ import {
   VaiControllerErrorReporterFailureInfo,
   VaiVaultErrorReporterError,
   VaiVaultErrorReporterInfo,
+  XvsVaultErrorReporterError,
+  XvsVaultErrorReporterInfo,
 } from 'constants/contracts/errorReporter';
 import { VError, IVErrorPhraseMap } from './VError';
 
@@ -17,12 +19,14 @@ const checkForTransactionError = (
     | typeof ComptrollerErrorReporterError
     | typeof TokenErrorReporterError
     | typeof VaiControllerErrorReporterError
-    | typeof VaiVaultErrorReporterError,
+    | typeof VaiVaultErrorReporterError
+    | typeof XvsVaultErrorReporterError,
   infoEnum:
     | typeof ComptrollerErrorReporterFailureInfo
     | typeof TokenErrorReporterFailureInfo
     | typeof VaiControllerErrorReporterFailureInfo
-    | typeof VaiVaultErrorReporterInfo,
+    | typeof VaiVaultErrorReporterInfo
+    | typeof XvsVaultErrorReporterInfo,
 ) => {
   if (receipt.events?.Failure) {
     const { error, info } = receipt.events?.Failure.returnValues;
@@ -57,3 +61,6 @@ export const checkForVaiControllerTransactionError = (receipt: TransactionReceip
 
 export const checkForVaiVaultTransactionError = (receipt: TransactionReceipt) =>
   checkForTransactionError(receipt, VaiVaultErrorReporterError, VaiVaultErrorReporterInfo);
+
+export const checkForXvsVaultTransactionError = (receipt: TransactionReceipt) =>
+  checkForTransactionError(receipt, XvsVaultErrorReporterError, XvsVaultErrorReporterInfo);

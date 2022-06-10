@@ -3,31 +3,35 @@ import {
   VaiVaultErrorReporterInfo,
 } from 'constants/contracts/errorReporter';
 import { VError } from 'errors';
-import { VaiVault } from 'types/contracts';
+import { XvsVault } from 'types/contracts';
 import fakeTransactionReceipt from '__mocks__/models/transactionReceipt';
-import claimVaiVaultReward from './claimVaiVaultReward';
+import claimXvsVaultReward from './claimXvsVaultReward';
 
 const fakeFromAccountsAddress = '0x3d759121234cd36F8124C21aFe1c6852d2bEd848';
+const fakeRewardTokenAddress = '0x8301F2213c0eeD49a7E28Ae4c3e91722919B8B47';
+const fakePoolIndex = 4;
 
-describe('api/mutation/claimVaiVaultReward', () => {
+describe('api/mutation/claimXvsVaultReward', () => {
   test('throws an error when request fails', async () => {
     const fakeContract = {
       methods: {
-        claim: () => ({
+        deposit: () => ({
           send: async () => {
             throw new Error('Fake error message');
           },
         }),
       },
-    } as unknown as VaiVault;
+    } as unknown as XvsVault;
 
     try {
-      await claimVaiVaultReward({
-        vaiVaultContract: fakeContract,
+      await claimXvsVaultReward({
+        xvsVaultContract: fakeContract,
         fromAccountAddress: fakeFromAccountsAddress,
+        rewardTokenAddress: fakeRewardTokenAddress,
+        poolIndex: fakePoolIndex,
       });
 
-      throw new Error('claimVaiVaultReward should have thrown an error but did not');
+      throw new Error('claimXvsVaultReward should have thrown an error but did not');
     } catch (error) {
       expect(error).toMatchInlineSnapshot('[Error: Fake error message]');
     }
@@ -36,7 +40,7 @@ describe('api/mutation/claimVaiVaultReward', () => {
   test('throws a transaction error when Failure event is present', async () => {
     const fakeContract = {
       methods: {
-        claim: () => ({
+        deposit: () => ({
           send: async () => ({
             events: {
               Failure: {
@@ -49,15 +53,17 @@ describe('api/mutation/claimVaiVaultReward', () => {
           }),
         }),
       },
-    } as unknown as VaiVault;
+    } as unknown as XvsVault;
 
     try {
-      await claimVaiVaultReward({
-        vaiVaultContract: fakeContract,
+      await claimXvsVaultReward({
+        xvsVaultContract: fakeContract,
         fromAccountAddress: fakeFromAccountsAddress,
+        rewardTokenAddress: fakeRewardTokenAddress,
+        poolIndex: fakePoolIndex,
       });
 
-      throw new Error('claimVaiVaultReward should have thrown an error but did not');
+      throw new Error('claimXvsVaultReward should have thrown an error but did not');
     } catch (error) {
       expect(error).toMatchInlineSnapshot(`[Error: ${VaiVaultErrorReporterError[1]}]`);
       expect(error).toBeInstanceOf(VError);
@@ -71,23 +77,26 @@ describe('api/mutation/claimVaiVaultReward', () => {
 
   test('returns Receipt when request succeeds', async () => {
     const sendMock = jest.fn(async () => fakeTransactionReceipt);
-    const claimMock = jest.fn(() => ({
+    const depositMock = jest.fn(() => ({
       send: sendMock,
     }));
 
     const fakeContract = {
       methods: {
-        claim: claimMock,
+        deposit: depositMock,
       },
-    } as unknown as VaiVault;
+    } as unknown as XvsVault;
 
-    const response = await claimVaiVaultReward({
-      vaiVaultContract: fakeContract,
+    const response = await claimXvsVaultReward({
+      xvsVaultContract: fakeContract,
       fromAccountAddress: fakeFromAccountsAddress,
+      rewardTokenAddress: fakeRewardTokenAddress,
+      poolIndex: fakePoolIndex,
     });
 
     expect(response).toBe(fakeTransactionReceipt);
-    expect(claimMock).toHaveBeenCalledTimes(1);
+    expect(depositMock).toHaveBeenCalledTimes(1);
+    expect(depositMock).toHaveBeenCalledWith(fakeRewardTokenAddress, fakePoolIndex, 0);
     expect(sendMock).toHaveBeenCalledTimes(1);
     expect(sendMock).toHaveBeenCalledWith({ from: fakeFromAccountsAddress });
   });
