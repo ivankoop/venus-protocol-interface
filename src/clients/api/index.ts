@@ -202,3 +202,5 @@ export { default as useGetVaiVaultPendingXvsWei } from './queries/useGetVaiVault
 export { default as getVaiVaultUserInfo } from './queries/getVaiVaultUserInfo';
 export * from './queries/getVaiVaultUserInfo';
 export { default as useGetVaiVaultUserInfo } from './queries/useGetVaiVaultUserInfo';
+
+export { default as useHasActiveProposal } from './queries/useHasActiveProposal';

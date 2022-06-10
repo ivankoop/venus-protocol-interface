@@ -122,6 +122,14 @@ export const getVaiVaultPendingXvsWei = jest.fn();
 export const useGetVaiVaultPendingXvsWei = () =>
   useQuery([FunctionKey.GET_VAI_VAULT_PENDING_XVS, fakeAddress], getVaiVaultPendingXvsWei);
 
+export const getLatestProposalIdByProposer = jest.fn();
+export const useGetLatestProposalIdByProposer = () =>
+  useQuery(
+    [FunctionKey.GET_LATEST_PROPOSAL_ID_BY_PROPOSER, fakeAddress],
+    getLatestProposalIdByProposer,
+  );
+export const useGetActiveProposal = jest.fn();
+
 // Mutations
 export const approveToken = jest.fn();
 export const useApproveToken = (options?: MutationObserverOptions) =>
